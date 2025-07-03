@@ -1,0 +1,534 @@
+{
+	"info": {
+		"_postman_id": "2b3f6c3d-d25a-4f77-81b8-2771c14258b4",
+		"name": "BACK2-TODO-APP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32693517"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Ezequiel\",\r\n    \"email\":\"svariumfoo@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "request-reset-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"svariumfoo@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/request-password-reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"request-password-reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"email\":\"svariumfoo@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify-token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/verify-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"verify-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify-email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/verify-email?token=c4ccac5ac80cfde22c55b1312e92577e80562ba3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"verify-email"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "c4ccac5ac80cfde22c55b1312e92577e80562ba3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profilePicture",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NGExNWQ1ZWYyZmNlMzNlNWI3NDdhMiIsInVzZXJuYW1lIjoiRXplcXVpZWwiLCJlbWFpbCI6InN2YXJpdW1mb29AZ21haWwuY29tIiwiaWF0IjoxNzUwMjg5NDk3LCJleHAiOjE3NTAyOTMwOTd9.Yzc98pq9nOnws2tK3TCzxEXnTtkWqFLTxLVMGVrC6Bs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "iconProfile",
+									"type": "file",
+									"src": "/C:/Users/MICHICOMPU/Downloads/stackblitz-icon-logo-png_seeklogo-444239.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/upload-profile-image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"upload-profile-image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProfileImage",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTlkODY1YzU2OWJkZmU0MTVmZWYxZSIsInVzZXJuYW1lIjoiRXplcXVpZWwiLCJlbWFpbCI6InN2YXJpdW1mb29AZ21haWwuY29tIiwiaWF0IjoxNzUwNzE4NTg2LCJleHAiOjE3NTA3MjIxODZ9.fV66W0u_gWyqgc_bt-eT63hlwcuiernSkvq9U2MXjW4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "iconProfile",
+									"type": "file",
+									"src": "/C:/Users/MICHICOMPU/Downloads/stackblitz-icon-logo-png_seeklogo-444239.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/profile-image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"profile-image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"123456\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTlkODY1YzU2OWJkZmU0MTVmZWYxZSIsInB1cnBvc2UiOiJwYXNzd29yZF9yZXNldCIsImlhdCI6MTc1MDcyMzg4NywiZXhwIjoxNzUwNzI3NDg3fQ.rMk2CFFmPaQVqE1Xkask9cxWqFZA0pbtaM6PZVwzx2g",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"reset-password",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTlkODY1YzU2OWJkZmU0MTVmZWYxZSIsInB1cnBvc2UiOiJwYXNzd29yZF9yZXNldCIsImlhdCI6MTc1MDcyMzg4NywiZXhwIjoxNzUwNzI3NDg3fQ.rMk2CFFmPaQVqE1Xkask9cxWqFZA0pbtaM6PZVwzx2g"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TASK",
+			"item": [
+				{
+					"name": "createTaskWithFiles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTlkODY1YzU2OWJkZmU0MTVmZWYxZSIsInVzZXJuYW1lIjoiRXplcXVpZWwiLCJlbWFpbCI6InN2YXJpdW1mb29AZ21haWwuY29tIiwiaWF0IjoxNzUxMzI0MDU3LCJleHAiOjE3NTEzMjc2NTd9.k1LOsjUohMUiObNNuW37OZCQqgZgnjWqmWMN0upa36w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "prueba de subida de tarea con files II",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/v1/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOneTaskById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/v1/tasks/68631317fbb1ff24f876f3f2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								"68631317fbb1ff24f876f3f2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTaskWithFiles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTlkODY1YzU2OWJkZmU0MTVmZWYxZSIsInVzZXJuYW1lIjoiRXplcXVpZWwiLCJlbWFpbCI6InN2YXJpdW1mb29AZ21haWwuY29tIiwiaWF0IjoxNzUxMzI2NDE5LCJleHAiOjE3NTEzMzAwMTl9.9rKfm79U3Bc6mXNmj9OaWeI32__pZ1xranQ9GeMxH6A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "TAREA ACTUALIZADA con una imagen nueva",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Esta tarea fue actualizada por la mejor comisión",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/C:/Users/MICHICOMPU/Downloads/stackblitz-icon-logo-png_seeklogo-444239.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/tasks/686315a3d3294313ff6d8fb1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								"686315a3d3294313ff6d8fb1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTask",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTlkODY1YzU2OWJkZmU0MTVmZWYxZSIsInVzZXJuYW1lIjoiRXplcXVpZWwiLCJlbWFpbCI6InN2YXJpdW1mb29AZ21haWwuY29tIiwiaWF0IjoxNzUxMzI5MDcwLCJleHAiOjE3NTEzMzI2NzB9.NdNl_rtmJBRKLV8cnU8Anmfoj5YrAqemu3e-Tf0pEs8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/v1/tasks/686315a3d3294313ff6d8fb1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								"686315a3d3294313ff6d8fb1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
