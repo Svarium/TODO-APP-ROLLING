@@ -5,7 +5,7 @@ import axios from "axios";
 export const register = async (userData) => {
     const res = await axios.post(`${API}/register`, userData)
     return res.data
-}
+};
 
 export const login = async (data) => {
     const res = await fetch(`${API}/login`, {
@@ -38,7 +38,7 @@ export const verifyToken = async () => {
     });
 
     return res.ok;
-}
+};
 
 export const profile = async () => {
     const res = await fetch(`${API}/profile`, {
@@ -48,4 +48,4 @@ export const profile = async () => {
     }) ;
     if(!res.ok) throw new Error("Token Inválido");
     return await res.json()
-}
+};
