@@ -158,13 +158,15 @@ export const profile = async (req,res) => {
 }
 
 export const verifyToken = async(req,res) => {
-    try {      
+    try {              
+        const authHeaders = req.headers.authorization;
+
         let token;
 
-         if(!token && req.cookies?.token){
-            token = req.cookies.token
-        } else{
-            return res.status(401).json({meesage: "No token provided"})
+        if(authHeaders && authHeaders.startsWith("Bearer ")){
+            token = authHeaders.split(" ")[1];
+        } else {
+            return res.status(401).json({message: "No token provided"})
         }
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
