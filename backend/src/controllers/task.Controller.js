@@ -75,8 +75,7 @@ export const getTasks = async(req,res) => {
     try {
 
     const tasks = await Task.find({
-        user: req.user.id,
-        
+        user: req.user.id,        
     })   
     .populate("user")
     .sort({createdAt: -1}) //ordena las tareas de la más nueva a la más antigua       
