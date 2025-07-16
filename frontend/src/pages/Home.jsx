@@ -3,6 +3,7 @@ import TaskForm from '../components/TaskForm';
 import {useAuth} from '../context/AuthContext';
 import {useTask} from '../context/TaskContext';
 import {toast} from "react-hot-toast";
+import EditTaskModal from '../components/EditTaskModal';
 
 
 function Home() {
@@ -11,7 +12,39 @@ function Home() {
   const {tasks, loadingTasks, deleteTask} = useTask();
   const [taskToEdit, setTaskToEdit] = useState(null);
 
+  const handleDelete = (id) => {
+    toast((t) => (
+      <div className="space-y-2">
+        <p>¿Eliminar esta tarea?</p>
+        <div className="flex gap-3 justify-end">
+          <button
+            onClick={async () => {
+              toast.dismiss(t.id);
+              try {
+                await deleteTask(id);
+                toast.success("Tarea eliminada");
+              } catch {
+                toast.error("Error al eliminar");
+              }
+            }}
+            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+          >
+            Sí
+          </button>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    ), {duration: 6000})
+  }
 
+  const handleEdit = (task) => {
+    setTaskToEdit(task)
+  };
 
 
   return (
@@ -32,13 +65,13 @@ function Home() {
             >
               <div className="flex justify-end gap-2 mb-2">
                 <button
-                  /* onClick={() => handleEdit(task)} */
+                  onClick={() => handleEdit(task)}
                   className="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500"
                 >
                   Editar
                 </button>
                 <button
-                 /*  onClick={() => handleDelete(task._id)} */
+                  onClick={() => handleDelete(task._id)}
                   className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                 >
                   Eliminar
@@ -75,12 +108,12 @@ function Home() {
         </ul>
       )}
 
-     {/*  {taskToEdit && (
+      {taskToEdit && (
         <EditTaskModal
           task={taskToEdit}
           onClose={() => setTaskToEdit(null)}
         />
-      )} */}
+      )}
     </div>
   )
 }
