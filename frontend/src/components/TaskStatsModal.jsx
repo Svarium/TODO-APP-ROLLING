@@ -1,5 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
-import * as Chart from 'chart.js';
+import {
+  Chart as ChartJS,
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+// Registrar los componentes necesarios
+ChartJS.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend
+);
 
 const getLastSixMonthsData = (tasks, useCreatedAt = true) => {
   const now = new Date();
@@ -14,7 +32,7 @@ const getLastSixMonthsData = (tasks, useCreatedAt = true) => {
   tasks.forEach((task) => {
     const dateToUse = useCreatedAt ? task.createdAt : task.dueDate;
     if (!dateToUse) return;
-    
+
     const taskDate = new Date(dateToUse);
     const key = taskDate.toLocaleDateString('es-ES', { month: 'short' });
     if (monthsData[key] !== undefined) monthsData[key]++;
@@ -33,30 +51,19 @@ const getFileStats = (tasks) => {
     totalArchivos += files.length;
 
     files.forEach(file => {
-      // Detectar tipo de archivo por extensión del nombre
       const fileName = file.name || '';
       const extension = fileName.split('.').pop()?.toLowerCase() || '';
       let displayType = 'Otros';
 
-      if (extension === 'pdf') {
-        displayType = 'PDF';
-      } else if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp'].includes(extension)) {
-        displayType = 'Imágenes';
-      } else if (['mp4', 'avi', 'mov', 'wmv', 'flv', 'webm', 'mkv'].includes(extension)) {
-        displayType = 'Videos';
-      } else if (['mp3', 'wav', 'flac', 'aac', 'ogg', 'm4a'].includes(extension)) {
-        displayType = 'Audio';
-      } else if (['doc', 'docx'].includes(extension)) {
-        displayType = 'Documentos Word';
-      } else if (['xls', 'xlsx', 'csv'].includes(extension)) {
-        displayType = 'Hojas de Cálculo';
-      } else if (['ppt', 'pptx'].includes(extension)) {
-        displayType = 'Presentaciones';
-      } else if (['txt', 'md', 'json', 'xml', 'html', 'css', 'js'].includes(extension)) {
-        displayType = 'Texto';
-      } else if (['zip', 'rar', '7z', 'tar', 'gz'].includes(extension)) {
-        displayType = 'Archivos Comprimidos';
-      }
+      if (extension === 'pdf') displayType = 'PDF';
+      else if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp'].includes(extension)) displayType = 'Imágenes';
+      else if (['mp4', 'avi', 'mov', 'wmv', 'flv', 'webm', 'mkv'].includes(extension)) displayType = 'Videos';
+      else if (['mp3', 'wav', 'flac', 'aac', 'ogg', 'm4a'].includes(extension)) displayType = 'Audio';
+      else if (['doc', 'docx'].includes(extension)) displayType = 'Documentos Word';
+      else if (['xls', 'xlsx', 'csv'].includes(extension)) displayType = 'Hojas de Cálculo';
+      else if (['ppt', 'pptx'].includes(extension)) displayType = 'Presentaciones';
+      else if (['txt', 'md', 'json', 'xml', 'html', 'css', 'js'].includes(extension)) displayType = 'Texto';
+      else if (['zip', 'rar', '7z', 'tar', 'gz'].includes(extension)) displayType = 'Archivos Comprimidos';
 
       fileTypes[displayType] = (fileTypes[displayType] || 0) + 1;
     });
@@ -76,16 +83,17 @@ const StatCard = ({ value, label, color }) => (
 const TaskStatsModal = ({ tasks = [], onClose }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
-  const [chartMode, setChartMode] = useState('created'); // 'created' o 'due'
+  const [chartMode, setChartMode] = useState('created');
 
   useEffect(() => {
     if (!tasks.length) return;
+
     const monthsData = getLastSixMonthsData(tasks, chartMode === 'created');
     const ctx = chartRef.current.getContext('2d');
 
     chartInstance.current?.destroy();
 
-    chartInstance.current = new Chart.Chart(ctx, {
+    chartInstance.current = new ChartJS(ctx, {
       type: 'bar',
       data: {
         labels: Object.keys(monthsData),
@@ -99,7 +107,7 @@ const TaskStatsModal = ({ tasks = [], onClose }) => {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { 
+        plugins: {
           legend: { display: false },
           tooltip: {
             callbacks: {
@@ -110,7 +118,12 @@ const TaskStatsModal = ({ tasks = [], onClose }) => {
             }
           }
         },
-        scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1 }
+          }
+        }
       }
     });
 
@@ -137,7 +150,6 @@ const TaskStatsModal = ({ tasks = [], onClose }) => {
     return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
   }).length;
 
-  // Tareas vencidas
   const overdueTasks = tasks.filter(({ dueDate }) => {
     if (!dueDate) return false;
     return new Date(dueDate) < now;
@@ -168,8 +180,8 @@ const TaskStatsModal = ({ tasks = [], onClose }) => {
               <button
                 onClick={() => setChartMode('created')}
                 className={`px-3 py-1 rounded text-sm ${
-                  chartMode === 'created' 
-                    ? 'bg-blue-500 text-white' 
+                  chartMode === 'created'
+                    ? 'bg-blue-500 text-white'
                     : 'bg-gray-200 text-gray-700'
                 }`}
               >
@@ -178,8 +190,8 @@ const TaskStatsModal = ({ tasks = [], onClose }) => {
               <button
                 onClick={() => setChartMode('due')}
                 className={`px-3 py-1 rounded text-sm ${
-                  chartMode === 'due' 
-                    ? 'bg-green-500 text-white' 
+                  chartMode === 'due'
+                    ? 'bg-green-500 text-white'
                     : 'bg-gray-200 text-gray-700'
                 }`}
               >
@@ -205,7 +217,7 @@ const TaskStatsModal = ({ tasks = [], onClose }) => {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-gray-50 p-4 rounded-lg">
             <h4 className="font-semibold text-gray-700 mb-2">Resumen</h4>
             <div className="text-sm text-gray-600">
